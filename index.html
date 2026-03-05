@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MindMate AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 🔒 LOGIN PROTECTION -->
+    <script>
+        if (!localStorage.getItem("loggedInUser")) {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <div class="app-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div>
+                <h2 class="logo">MindMate AI</h2>
+
+                <!-- 👤 Logged in user -->
+                <p id="loggedUser" style="font-size:13px; opacity:0.7; margin-bottom:10px;"></p>
+
+                <button id="newChatBtn" class="new-chat-btn">+ New Chat</button>
+
+                <div class="chat-history">
+                    <h4>Recent Chats</h4>
+                    <ul id="historyList"></ul>
+                </div>
+            </div>
+
+            <!-- Theme + Logout -->
+            <div>
+                <button id="themeToggle" class="theme-toggle">🌙 Dark Mode</button>
+                <button onclick="logout()" class="theme-toggle" style="margin-top:8px; background:#ef4444;">
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Chat Section -->
+        <main class="chat-section">
+
+            <div id="welcomeScreen" class="welcome-screen">
+                <h1>How can I support you today?</h1>
+                <p>AI-powered student counselling assistant</p>
+
+                <div class="suggestions">
+                    <button class="suggestion-btn">Exam Stress</button>
+                    <button class="suggestion-btn">Career Guidance</button>
+                    <button class="suggestion-btn">Motivation</button>
+                    <button class="suggestion-btn">Anxiety Help</button>
+                </div>
+            </div>
+
+            <div id="chatContainer" class="chat-container"></div>
+
+            <div id="typingIndicator" class="typing-indicator hidden">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="messageInput" placeholder="Type your message here..." autocomplete="off">
+                <button id="sendBtn" class="send-btn">➤</button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- 👤 Show logged in user -->
+    <script>
+        document.getElementById("loggedUser").innerText =
+            "Logged in as: " + localStorage.getItem("loggedInUser");
+    </script>
+
+    <!-- 🔐 Auth logic first -->
+    <script src="auth.js"></script>
+
+    <!-- 💬 Chat logic -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
